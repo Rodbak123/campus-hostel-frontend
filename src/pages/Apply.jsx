@@ -18,7 +18,7 @@ export default function Apply() {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      await axios.post('http://localhost:5000/api/applications', {
+     await axios.post('https://campus-hostel-backend-ztbe.onrender.com/api/applications', applicationData, { headers: { Authorization: `Bearer ${token}` } });
         roomType, phone, gender
       }, {
         headers: { Authorization: `Bearer ${token}` }
