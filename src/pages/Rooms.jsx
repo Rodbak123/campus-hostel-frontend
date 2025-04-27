@@ -1,8 +1,9 @@
 import './Rooms.css';
 import { useNavigate } from 'react-router-dom'; 
+import axios from 'axios';
 import doubleFan from '../assets/double-fan.jpg';
 import doubleFanAC from '../assets/double-fan-ac.jpg';
-import singleFanAC from '../assets/single-fan-ac.jpeg';
+singleFanAC from '../assets/single-fan-ac.jpeg';
 
 export default function Rooms() {
   const navigate = useNavigate();
@@ -31,12 +32,28 @@ export default function Rooms() {
     }
   ];
 
-  const handleRoomClick = (room) => {
-    
-    localStorage.setItem('selectedRoom', room.name);
+  const handleRoomClick = async (room) => {
+    try {
+      const token = localStorage.getItem('token');
+      await axios.post('https://campus-hostel-backend-ztbe.onrender.com/api/applications',
+        {
+          roomType: room.name,
+          phone: '',
+          gender: ''
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
 
-    
-    navigate('/apply');
+      localStorage.setItem('selectedRoom', room.name);
+      navigate('/apply');
+    } catch (err) {
+      console.error('Failed to select room:', err);
+      alert('❌ Failed to select room');
+    }
   };
 
   return (
@@ -60,3 +77,4 @@ export default function Rooms() {
     </div>
   );
 }
+
