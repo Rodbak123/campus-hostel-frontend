@@ -20,6 +20,7 @@ export default function Apply() {
     try {
      await axios.post('https://campus-hostel-backend-ztbe.onrender.com/api/applications', applicationData, { headers: { Authorization: `Bearer ${token}` } });
         roomType, phone, gender
+      const backendUrl = import.meta.env.VITE_BACKEND_URL;
       }, {
         headers: { Authorization: `Bearer ${token}` }
       });
