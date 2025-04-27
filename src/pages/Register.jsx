@@ -9,27 +9,13 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-   
-    console.log('Register Form Data:', form);
-
     try {
-      const backendUrl = import.meta.env.VITE_BACKEND_URL;
-     
-      console.log('Backend URL:', backendUrl);
-
-      
-      await axios.post(`${backendUrl}/api/users/register`, form);
-
-     
+      await axios.post('http://localhost:5000/api/users/register', form);
       setMsg('✅ Registration successful! Redirecting...');
       setTimeout(() => navigate('/login'), 1500); 
     } catch (err) {
-      // Enhanced error handling
       if (err.response?.data?.error === 'Email already exists') {
         setMsg('❌ Email already exists.');
-      } else if (err.response?.data?.error) {
-        setMsg(`❌ ${err.response.data.error}`);
       } else {
         setMsg('❌ Something went wrong.');
       }
@@ -64,4 +50,3 @@ export default function Register() {
     </div>
   );
 }
-

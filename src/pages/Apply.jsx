@@ -17,19 +17,15 @@ export default function Apply() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
-    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'https://campus-hostel-backend-ztbe.onrender.com';
-    
-    const applicationData = { roomType, phone, gender };
-
     try {
-      await axios.post(`${backendUrl}/api/applications`, applicationData, {
+      await axios.post('http://localhost:5000/api/applications', {
+        roomType, phone, gender
+      }, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      
       alert('✅ Application submitted successfully!');
       navigate('/dashboard');
     } catch (err) {
-      console.error(err);
       alert('❌ Failed to submit application.');
     }
   };

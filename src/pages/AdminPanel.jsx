@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './AdminPanel.css';
@@ -13,9 +14,10 @@ export default function AdminPanel() {
   async function fetchApplications() {
     try {
       const token = localStorage.getItem('token');
-      const backendUrl = import.meta.env.VITE_BACKEND_URL;
-      const res = await axios.get(`${backendUrl}/api/applications`, {
-        headers: { Authorization: `Bearer ${token}` }
+      const res = await axios.get('http://localhost:5000/api/applications', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       });
       setApplications(res.data);
     } catch (err) {
@@ -25,15 +27,19 @@ export default function AdminPanel() {
   }
 
   async function handleAction(id, status) {
-    console.log('Clicked Accept/Reject', id, status);
+    console.log('Clicked Accept/Reject', id, status); 
     try {
       const token = localStorage.getItem('token');
-      const backendUrl = import.meta.env.VITE_BACKEND_URL;
-      await axios.post(`${backendUrl}/api/applications/process/${id}`, { status }, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      await axios.post(`http://localhost:5000/api/applications/process/${id}`, 
+        { status }, 
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
       console.log('Status updated successfully!');
-      fetchApplications();
+      fetchApplications(); 
     } catch (err) {
       console.error('Failed to update application status:', err);
       alert('❌ Failed to update status');
