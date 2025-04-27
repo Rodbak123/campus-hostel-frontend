@@ -9,18 +9,28 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+   
+    console.log('Register Form Data:', form);
+
     try {
       const backendUrl = import.meta.env.VITE_BACKEND_URL;
-      // Directly use 'form' to send all values in one object.
+     
+      console.log('Backend URL:', backendUrl);
+
+      
       await axios.post(`${backendUrl}/api/users/register`, form);
+
+     
       setMsg('✅ Registration successful! Redirecting...');
-      setTimeout(() => navigate('/login'), 1500);
+      setTimeout(() => navigate('/login'), 1500); 
     } catch (err) {
-      // Check if the error is due to the email already existing
+      // Enhanced error handling
       if (err.response?.data?.error === 'Email already exists') {
         setMsg('❌ Email already exists.');
+      } else if (err.response?.data?.error) {
+        setMsg(`❌ ${err.response.data.error}`);
       } else {
-        // If it's another type of error, just show "Something went wrong."
         setMsg('❌ Something went wrong.');
       }
     }
@@ -54,3 +64,4 @@ export default function Register() {
     </div>
   );
 }
+
