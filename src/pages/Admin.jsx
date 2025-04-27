@@ -23,6 +23,7 @@ export default function Admin() {
 
   const updateStatus = async (id, status) => {
     try {
+      const backendUrl = import.meta.env.VITE_BACKEND_URL;
       await axios.post(`http://localhost:5000/api/applications/process/${id}`, { status }, {
         headers: { Authorization: `Bearer ${token}` }
       });
