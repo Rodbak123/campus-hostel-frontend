@@ -36,6 +36,7 @@ export default function Rooms() {
     try {
       const token = localStorage.getItem('token');
       await axios.post('https://campus-hostel-backend-ztbe.onrender.com/api/applications',
+      const backendUrl = import.meta.env.VITE_BACKEND_URL;
         {
           roomType: room.name,
           phone: '',
