@@ -15,6 +15,7 @@ export default function AdminPanel() {
     try {
       const token = localStorage.getItem('token');
       const res = await axios.get('https://campus-hostel-backend-ztbe.onrender.com/api/applications', { headers: { Authorization: `Bearer ${token}` } });
+      const backendUrl = import.meta.env.VITE_BACKEND_URL;
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -30,7 +31,8 @@ export default function AdminPanel() {
     console.log('Clicked Accept/Reject', id, status); 
     try {
       const token = localStorage.getItem('token');
-      await axios.post('https://campus-hostel-backend-ztbe.onrender.com/api/applications/process/${id}', { status }, { headers: { Authorization: `Bearer ${token}` } }); 
+      await axios.post('https://campus-hostel-backend-ztbe.onrender.com/api/applications/process/${id}', { status }, { headers: { Authorization: `Bearer ${token}` } });
+      const backendUrl = import.meta.env.VITE_BACKEND_URL;
         { status }, 
         {
           headers: {
