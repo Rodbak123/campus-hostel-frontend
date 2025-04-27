@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import doubleFan from '../assets/double-fan.jpg';
 import doubleFanAC from '../assets/double-fan-ac.jpg';
-singleFanAC from '../assets/single-fan-ac.jpeg';
+import singleFanAC from '../assets/single-fan-ac.jpeg';
 
 export default function Rooms() {
   const navigate = useNavigate();
