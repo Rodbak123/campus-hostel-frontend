@@ -10,8 +10,8 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('https://campus-hostel-backend-ztbe.onrender.com/api/users/register', { name, email, password });
       const backendUrl = import.meta.env.VITE_BACKEND_URL;
+      await axios.post('https://campus-hostel-backend-ztbe.onrender.com/api/users/register', { name, email, password });
       setMsg('✅ Registration successful! Redirecting...');
       setTimeout(() => navigate('/login'), 1500); 
     } catch (err) {
