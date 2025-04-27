@@ -14,7 +14,7 @@ export default function AdminPanel() {
   async function fetchApplications() {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5000/api/applications', {
+      const res = await axios.get('https://campus-hostel-backend-ztbe.onrender.com/api/applications', { headers: { Authorization: `Bearer ${token}` } });
         headers: {
           Authorization: `Bearer ${token}`
         }
